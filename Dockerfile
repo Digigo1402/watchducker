@@ -7,6 +7,7 @@ COPY . .
 RUN GOOS=linux go build -o watchducker .
 
 FROM alpine:latest
+RUN apk add --no-cache tzdata
 COPY --from=builder /app/watchducker /usr/local/bin/
 
 CMD ["watchducker"]
