@@ -14,11 +14,11 @@ func main() {
 
 	ctx := context.Background()
 
-	// 如果指定了 cron 表达式，则进入定时执行模式
-	if config.Get().CronExpression() != "" {
-		cmd.RunCronScheduler(ctx)
+	if config.Get().RunOnce() {
+		cmd.RunOnce(ctx)
 		return
 	}
 
-	cmd.RunOnce(ctx)
+	cmd.RunCronScheduler(ctx)
+
 }
