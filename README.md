@@ -75,6 +75,23 @@ watchducker --cron "*/30 * * * *" nginx redis
 watchducker --cron "@daily" --no-restart nginx
 ```
 
+### Docker Compose 配置示例
+
+```yml
+services:
+  watchducker:
+    image: naomi233/watchducker
+    container_name: watchducker
+    network_mode: bridge
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Asia/Shanghai
+      - WATCHDUCKER_LOG_LEVEL=DEBUG
+      - WATCHDUCKER_CRON=0 2 * * *
+      - WATCHDUCKER_LABEL=true
+```
+
 ## ⚙️ 配置选项
 
 ### 命令行参数
