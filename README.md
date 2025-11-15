@@ -65,6 +65,7 @@ docker run --name watchducker -v /var/run/docker.sock:/var/run/docker.sock -v $(
 docker run --name watchducker \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e WATCHDUCKER_SETTING_PUSH_SERVER=telegram \
+  -e WATCHDUCKER_TELEGRAM_API_URL=api.telegram.org \
   -e WATCHDUCKER_TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN \
   -e WATCHDUCKER_TELEGRAM_CHAT_ID=YOUR_CHAT_ID \
   naomi233/watchducker:latest watchducker --cron "0 2 * * *" --label
@@ -151,7 +152,7 @@ telegram:
 
 ```bash
 # 基础配置
-export WATCHDUCKER_SETTING_PUSH_SERVER="telegram"
+export WATCHDUCKER_SETTING_PUSH_SERVER="telegram,dingrobot"
 export WATCHDUCKER_SETTING_LOG_LEVEL="INFO"
 
 # Telegram 配置
@@ -179,6 +180,7 @@ services:
       - WATCHDUCKER_LABEL=true
       # 通知配置（无需挂载 push.yaml）
       - WATCHDUCKER_SETTING_PUSH_SERVER=telegram
+      - WATCHDUCKER_TELEGRAM_API_URL=api.telegram.org
       - WATCHDUCKER_TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
       - WATCHDUCKER_TELEGRAM_CHAT_ID=YOUR_CHAT_ID
 ```

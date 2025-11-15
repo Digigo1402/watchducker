@@ -218,6 +218,6 @@ func PrintUsage() {
 	fmt.Println("  watchducker --cron \"@daily\" --all --disabled-containers mysql # 每天检查更新所有容器，但排除mysql")
 	fmt.Println()
 	fmt.Println("说明:") 
-	fmt.Println("  - 优先级：指定容器 > --label > --all")
+	fmt.Println("  - 优先级：指定容器 > --all > --label")
 	fmt.Println("  - 环境变量优先级低于命令行参数")
 }

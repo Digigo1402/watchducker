@@ -46,10 +46,10 @@ func RunOnce(ctx context.Context) {
 
 	if len(cfg.ContainerNames()) > 0 {
 		checkContainersByName(ctx)
-	} else if cfg.CheckLabel() {
-		checkContainersByLabel(ctx)
 	} else if cfg.CheckAll() {
 		checkAllContainers(ctx)
+	} else if cfg.CheckLabel() {
+		checkContainersByLabel(ctx)
 	} else {
 		config.PrintUsage()
 	}
