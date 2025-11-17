@@ -77,6 +77,41 @@ func (c *Checker) CheckByLabel(ctx context.Context, labelKey, labelValue string,
 	return c.checkImages(ctx, filteredContainers, utils.CreateCheckCallback())
 }
 
+// CheckByLabelReversed 检查没有传入标签的容器
+func (c *Checker) CheckByLabelReversed(ctx context.Context, labelKey, labelValue string, disabledContainers []string) (*types.BatchCheckResult, error) {
+	logger.Info("开始检查没有 %s=%s 标签的容器", labelKey, labelValue)
+	logger.Info("被排除的容器: %v", disabledContainers)
+
+	// 获取所有容器
+	containers, err := c.containerSvc.GetAll(ctx, c.includeStopped)
+	if err != nil {
+		return nil, fmt.Errorf("获取所有容器失败: %w", err)
+	}
+
+	// 过滤掉被排除的容器和带有指定标签的容器
+	filteredContainers := make([]types.ContainerInfo, 0, len(containers))
+
+	for _, container := range containers {
+		// 检查是否在被排除列表中
+		if utils.SliceContains(disabledContainers, container.Name) {
+			logger.Info("跳过被排除的容器: %s", container.Name)
+			continue
+		}
+
+		// 检查是否带有指定标签
+		if val, exists := container.Labels[labelKey]; exists && val == labelValue {
+			logger.Info("跳过带有标签 %s=%s 的容器: %s", labelKey, labelValue, container.Name)
+			continue
+		}
+
+		// 添加到结果列表
+		filteredContainers = append(filteredContainers, container)
+	}
+
+	// 使用通用检查逻辑
+	return c.checkImages(ctx, filteredContainers, utils.CreateCheckCallback())
+}
+
 // CheckAll 检查所有容器的镜像更新
 func (c *Checker) CheckAll(ctx context.Context, disabledContainers []string) (*types.BatchCheckResult, error) {
 	logger.Info("开始检查所有容器的镜像更新")

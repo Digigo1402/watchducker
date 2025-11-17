@@ -90,6 +90,8 @@ watchducker --cron "0 2 * * *" --label
 watchducker --cron "*/30 * * * *" nginx redis
 # 每天执行，只检查不重启
 watchducker --cron "@daily" --no-restart nginx
+# 使用 --label-reversed 参数检查所有容器，排除带有 watchducker.update=true 标签的容器
+watchducker --label-reversed --once
 
 # 使用通知功能（需要配置 push.yaml）
 watchducker --cron "0 2 * * *" --label
@@ -117,14 +119,15 @@ services:
 
 ### 命令行参数
 
-- `--label`: 检查所有带有 `watchducker.update=true` 标签的容器
-- `--no-restart`: 只更新镜像，不重启容器
 - `--all`: 检查所有容器（默认仅包含运行中的容器）
-- `--disabled-containers`: 排除指定的容器，不进行检查和更新（支持逗号分隔多个容器）
-- `--include-stopped`: 在检查时包含已停止的容器
-- `--clean`: 更新容器后自动清理悬空镜像
-- `--cron`: 定时执行，使用标准 [cron 表达式](https://crontab.guru) 格式，默认 "0 2 * * *"
+- `--label`: 检查带有 `watchducker.update=true` 标签的容器
+- `--label-reversed`: 检查没有 `watchducker.update=true` 标签的容器
+- `--cron`: 定时执行，使用标准 [cron 表达式](https://crontab.guru) 格式，默认值 "0 2 * * *"
 - `--once`: 只执行一次检查和更新，然后退出
+- `--clean`: 更新容器后自动清理悬空镜像
+- `--no-restart`: 只更新镜像，不重启容器
+- `--include-stopped`: 在检查时包含已停止的容器
+- `--disabled-containers`: 排除指定的容器，不进行检查和更新（支持逗号分隔多个容器）
 - 容器名称列表
 
 ### 通知功能配置
@@ -207,32 +210,35 @@ services:
 ### 环境变量
 
 ```bash
-# 等同于 --label 选项
-export WATCHDUCKER_LABEL=true
-
-# 等同于 --all 选项
-export WATCHDUCKER_ALL=true
-
-# 等同于 --include-stopped 选项
-export WATCHDUCKER_INCLUDE_STOPPED=true
-
-# 等同于 --no-restart 选项
-export WATCHDUCKER_NO_RESTART=true
-
-# 等同于 --clean 选项
-export WATCHDUCKER_CLEAN=true
-
-# 等同于 --cron 选项
-export WATCHDUCKER_CRON="0 2 * * *"
-
-# 等同于 --disabled-containers 选项
-export WATCHDUCKER_DISABLED_CONTAINERS="container1,container2"
+# 设置容器时区（默认 UTC，可按需覆盖）
+export TZ=Asia/Shanghai
 
 # 设置日志级别 (DEBUG/INFO/WARN/ERROR)
 export WATCHDUCKER_LOG_LEVEL=DEBUG
 
-# 设置容器时区（默认 UTC，可按需覆盖）
-export TZ=Asia/Shanghai
+# 等同于 --all 选项
+export WATCHDUCKER_ALL=true
+
+# 等同于 --label 选项
+export WATCHDUCKER_LABEL=true
+
+# 等同于 --label-reversed 选项
+export WATCHDUCKER_LABEL_REVERSED=true
+
+# 等同于 --cron 选项
+export WATCHDUCKER_CRON="0 2 * * *"
+
+# 等同于 --clean 选项
+export WATCHDUCKER_CLEAN=true
+
+# 等同于 --no-restart 选项
+export WATCHDUCKER_NO_RESTART=true
+
+# 等同于 --include-stopped 选项
+export WATCHDUCKER_INCLUDE_STOPPED=true
+
+# 等同于 --disabled-containers 选项
+export WATCHDUCKER_DISABLED_CONTAINERS="container1,container2"
 ```
 
 ### 时区配置
@@ -304,7 +310,7 @@ go build -o watchducker .
 goreleaser build --snapshot
 
 # 创建 Docker 镜像
-docker build -t watchducker .
+goreleaser release --snapshot
 ```
 
 ## 📊 工作流程

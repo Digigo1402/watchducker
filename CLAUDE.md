@@ -1,6 +1,6 @@
 # WatchDucker - Docker 容器自动更新工具
 
-> 更新时间：2025-11-15 15:30:00
+> 更新时间：2025-11-17 17:41:08
 
 ## 项目愿景
 
@@ -68,6 +68,7 @@ goreleaser build --snapshot
 - **定时模式**: `watchducker --cron "0 2 * * *" --label`
 - **全部容器**: `watchducker --all --once`
 - **标签驱动**: 通过 `watchducker.update=true` 标签管理容器
+- **反向标签**: 通过 `--label-reversed` 参数检查没有 `watchducker.update=true` 标签的容器
 - **镜像清理**: `watchducker --clean --once nginx` (更新后清理悬空镜像)
 - **容器排除**: `watchducker --disabled-containers "container1,container2" --once` (排除指定容器)
 - **通知功能**: 配置 `push.yaml` 文件或环境变量后自动推送更新结果到 15+ 种平台
@@ -101,6 +102,12 @@ goreleaser build --snapshot
 
 ## 变更记录 (Changelog)
 
+### 2025-11-17 17:41:08
+- 新增 `--label-reversed` 参数功能，支持检查没有 `watchducker.update=true` 标签的容器
+- 更新配置验证逻辑，支持多种检查方式组合
+- 优化命令行参数优先级逻辑
+- 改进文档和示例说明
+
 ### 2025-11-15 15:30:00
 - 更新项目文档，同步最新功能变更
 - 完善模块索引和配置说明
@@ -126,7 +133,7 @@ goreleaser build --snapshot
 
 ---
 
-**文件统计**: 15个源文件，100%覆盖主要模块
-**最新功能**: 支持多平台通知推送（15+ 种方式）
+**文件统计**: 13个源文件，100%覆盖主要模块
+**最新功能**: 支持多平台通知推送（15+ 种方式）、反向标签选择、环境变量配置通知
 **下一步扫描建议**: 无（已完整扫描所有模块）
 **关键缺口**: 测试覆盖率缺失，建议添加单元测试和集成测试

@@ -40,6 +40,16 @@ func checkAllContainers(ctx context.Context) {
 	})
 }
 
+// checkContainersByLabelReversed 检查没有传入标签的容器
+func checkContainersByLabelReversed(ctx context.Context) {
+	labelKey, labelValue := "watchducker.update", "true"
+	cfg := config.Get()
+
+	RunChecker(ctx, func(checker *core.Checker) (*types.BatchCheckResult, error) {
+		return checker.CheckByLabelReversed(ctx, labelKey, labelValue, cfg.DisabledContainers())
+	})
+}
+
 // RunOnce 单次执行模式
 func RunOnce(ctx context.Context) {
 	cfg := config.Get()
@@ -48,6 +58,8 @@ func RunOnce(ctx context.Context) {
 		checkContainersByName(ctx)
 	} else if cfg.CheckAll() {
 		checkAllContainers(ctx)
+	} else if cfg.CheckLabelReversed() {
+		checkContainersByLabelReversed(ctx)
 	} else if cfg.CheckLabel() {
 		checkContainersByLabel(ctx)
 	} else {
